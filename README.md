@@ -36,3 +36,4 @@ Para abordar estos desafíos, CampusBike solicita el diseño y desarrollo de una
 Asegurar la integridad y consistencia de los datos mediante el uso adecuado de claves primarias y foráneas, así como restricciones de unicidad.
 
 # Realizado por: Ytzhak Carvajal - C4
+### Muchas Gracias.

@@ -1,7 +1,7 @@
 CREATE DATABASE TestYtzhak;
 USE TestYtzhak;
 
-CREATE TABLE Clientes (
+CREATE TABLE Cliente (
     cliente_id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100),
     direccion VARCHAR(200),
@@ -10,7 +10,7 @@ CREATE TABLE Clientes (
 );
 
 
-CREATE TABLE Proveedores (
+CREATE TABLE Proveedor (
     proveedor_id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100),
     direccion VARCHAR(200),
@@ -19,31 +19,31 @@ CREATE TABLE Proveedores (
 );
 
 
-CREATE TABLE Bicicletas (
+CREATE TABLE Bicicleta (
     bicicleta_id INT PRIMARY KEY AUTO_INCREMENT,
     modelo VARCHAR(50),
     marca VARCHAR(50),
     precio DECIMAL(10,2),
     proveedor_id INT,
-    FOREIGN KEY (proveedor_id) REFERENCES Proveedores(proveedor_id)
+    FOREIGN KEY (proveedor_id) REFERENCES Proveedor(proveedor_id)
 );
 
 
-CREATE TABLE Repuestos (
+CREATE TABLE Repuesto (
     repuesto_id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50),
     descripcion TEXT,
     precio DECIMAL(10,2),
     proveedor_id INT,
-    FOREIGN KEY (proveedor_id) REFERENCES Proveedores(proveedor_id)
+    FOREIGN KEY (proveedor_id) REFERENCES Proveedor(proveedor_id)
 );
 
-CREATE TABLE Ventas (
+CREATE TABLE Venta (
     venta_id INT PRIMARY KEY AUTO_INCREMENT,
     cliente_id INT,
     fecha DATE,
     total DECIMAL(10,2),
-    FOREIGN KEY (cliente_id) REFERENCES Clientes(cliente_id)
+    FOREIGN KEY (cliente_id) REFERENCES Cliente(cliente_id)
 );
 
 CREATE TABLE Detalle_Venta (
@@ -51,16 +51,16 @@ CREATE TABLE Detalle_Venta (
     bicicleta_id INT,
     cantidad INT,
     PRIMARY KEY (venta_id, bicicleta_id),
-    FOREIGN KEY (venta_id) REFERENCES Ventas(venta_id),
-    FOREIGN KEY (bicicleta_id) REFERENCES Bicicletas(bicicleta_id)
+    FOREIGN KEY (venta_id) REFERENCES Venta(venta_id),
+    FOREIGN KEY (bicicleta_id) REFERENCES Bicicleta(bicicleta_id)
 );
 
-CREATE TABLE Compras (
+CREATE TABLE Compra (
     compra_id INT PRIMARY KEY AUTO_INCREMENT,
     proveedor_id INT,
     fecha DATE,
     total DECIMAL(10,2),
-    FOREIGN KEY (proveedor_id) REFERENCES Proveedores(proveedor_id)
+    FOREIGN KEY (proveedor_id) REFERENCES Proveedor(proveedor_id)
 );
 
 CREATE TABLE Detalle_Compra (
@@ -68,8 +68,8 @@ CREATE TABLE Detalle_Compra (
     repuesto_id INT,
     cantidad INT,
     PRIMARY KEY (compra_id, repuesto_id),
-    FOREIGN KEY (compra_id) REFERENCES Compras(compra_id),
-    FOREIGN KEY (repuesto_id) REFERENCES Repuestos(repuesto_id)
+    FOREIGN KEY (compra_id) REFERENCES Compra(compra_id),
+    FOREIGN KEY (repuesto_id) REFERENCES Repuesto(repuesto_id)
 );
 
 CREATE TABLE Inventario (
@@ -77,14 +77,14 @@ CREATE TABLE Inventario (
     cantidad INT,
     tipo VARCHAR(50),
     PRIMARY KEY (bicicleta_id, tipo),
-    FOREIGN KEY (bicicleta_id) REFERENCES Bicicletas(bicicleta_id)
+    FOREIGN KEY (bicicleta_id) REFERENCES Bicicleta(bicicleta_id)
 );
 
-DESCRIBE Bicicletas;
+DESCRIBE Bicicleta;
 
-DESCRIBE Clientes ;
+DESCRIBE Cliente;
 
-DESCRIBE Compras; 
+DESCRIBE Compra; 
 
 DESCRIBE Detalle_Compra;
 
@@ -92,8 +92,8 @@ DESCRIBE Detalle_Venta;
 
 DESCRIBE Inventario;
 
-DESCRIBE Proveedores;
+DESCRIBE Proveedor;
 
-DESCRIBE Repuestos;
+DESCRIBE Repuesto;
 
-DESCRIBE Ventas;
+DESCRIBE Venta;
